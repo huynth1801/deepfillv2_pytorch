@@ -3,7 +3,6 @@ import os
 import cv2
 from flask import Flask, render_template, jsonify, request
 import numpy as np
-import json
 import uuid
 from PIL import Image
 from predict import predict
@@ -54,7 +53,7 @@ def process():
         # Doing inpainting
         output = predict(file_path_raw, file_path_mask)
         cv2.imwrite(file_path_output, output)
-        resize(file_path_output, size=(256,256))
+        resize(file_path_output, size=(128,128))
 
         return jsonify(
             {

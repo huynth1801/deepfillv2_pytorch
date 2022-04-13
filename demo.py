@@ -1,7 +1,6 @@
 import cv2
 import os
 from matplotlib import image
-from pyparsing import Opt
 import torch
 import numpy as np
 from glob import glob

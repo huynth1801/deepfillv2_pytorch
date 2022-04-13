@@ -52,8 +52,3 @@ def predict(img, mask, opt=None):
     generated = generated[0].transpose((1, 2, 0))
     result = generated * mask_raw + img_raw * (1 - mask_raw)
     result = result.astype(np.unit8)
-
-    # result = Image.fromarray(result).resize((w_raw, h_raw))
-    # result = np.array(result)
-    # result = Image.fromarray(result.astype(np.uint8))
-    # result.save(f'static/results/{name}')
