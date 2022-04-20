@@ -16,10 +16,10 @@ class Sketcher():
         else:
             cv2.setMouseCallback(self.window_name, self.on_mouse)
 
-    def small_thick(self):
+    def small_thick(self,):
         self.thick = max(3, self.thick - 1)
 
-    def large_thick(self):
+    def large_thick(self,):
         self.thick = min(50, self.thick + 1)
 
     def show(self):
@@ -33,7 +33,7 @@ class Sketcher():
             self.prev_loc = None
 
         if self.prev_loc and flags and cv2.EVENT_FLAG_LBUTTON:
-            for dst, color in zip(self.dests, self.colors_func()):
+            for dst, color in zip(self.dests, self.colors()):
                 cv2.line(dst, self.prev_loc, loc, color, self.thick)
             self.dirty = True
             self.prev_loc = loc
@@ -45,7 +45,7 @@ class Sketcher():
         if event == cv2.EVENT_LBUTTONDOWN:
             self.prev_loc = loc
         elif event == cv2.EVENT_LBUTTONUP:
-            for dst, color in zip(self.dests, self.colors_func()):
+            for dst, color in zip(self.dests, self.colors()):
                 cv2.rectangle(dst, self.prev_loc, loc, color, -1)
             self.dirty = True
             self.prev_loc = None

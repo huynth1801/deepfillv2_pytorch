@@ -7,6 +7,7 @@ from glob import glob
 from models.model import Generator 
 from torchvision.transforms import ToTensor
 from utils.painter import Sketcher
+from options.demo_options import opt
 
 
 def postProcess(image):
@@ -19,7 +20,7 @@ def postProcess(image):
 def demo(opt):
     # Load images
     img_list = []
-    for ext in ['*.jpg', '*.png']:
+    for ext in ['*.jpg', '*.png', '*.jpeg']:
         img_list.extend(glob(os.path.join(opt.test_dir, ext)))
     img_list.sort()
 
@@ -37,8 +38,8 @@ def demo(opt):
         h, w, c = orig_img.shape
         mask = np.zeros([h, w, 1], np.uint8)
         image_copy = orig_img.copy()
-        sketch = Sketcher(
-            'input', [image_copy, mask], lambda: ((255, 255, 255), (255, 255, 255)), opt.thick, opt.painter)
+        sketch = Sketcher('input', [image_copy, mask], lambda: ((255, 255, 255), (255, 255, 255)), 
+                        opt.thick, opt.painter)
 
         while True:
             ch = cv2.waitKey()
@@ -81,7 +82,7 @@ def demo(opt):
                 print("Reset")
 
             elif ch == ord("+"):
-                sketch.larger_thick()
+                sketch.large_thick()
 
             elif ch == ord("-"):
                 sketch.small_thick()
@@ -101,4 +102,4 @@ def demo(opt):
             break
 
 if __name__=='__main__':
-    pass
+    demo(opt)
