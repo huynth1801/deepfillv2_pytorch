@@ -15,7 +15,7 @@ opt = TestOptions().parse()
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-def Inpain_Test(opt):
+def Inpaint_Test(opt):
     def load_model(generator, epoch, opt):
         pre_dict = torch.load(opt.load_name)
         generator.load_state_dict(pre_dict)
@@ -84,4 +84,4 @@ def Inpain_Test(opt):
 
 if __name__=='__main__':
     opt = TestOptions().parse()
-    Inpain_Test(opt)
+    Inpaint_Test(opt)
