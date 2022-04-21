@@ -6,7 +6,7 @@ parser = argparse.ArgumentParser(description="Image Inpainting")
 
 #
 parser.add_argument("--test_dir", type=str, default='./test_folder/img', help="image foldere for testing with application")
-parser.add_argument("--pretrained", type=str, default='./save_models/free_form/deepfillv2_G_epoch40_batchsize16.pth', help="pretrained model of dataset celeb or places2")
+parser.add_argument("--pretrained", type=str, default='./save_models/free_form/deepfillv2_G_epoch50_batchsize16.pth', help="pretrained model of dataset celeb or places2")
 # Folder to save outputs
 parser.add_argument('--outputs', type=str, default='./outputs', help="path to save ouputs of demo")
 # Options for paint
