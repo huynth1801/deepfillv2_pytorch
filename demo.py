@@ -58,8 +58,9 @@ def demo(opt):
                     second_np = postProcess(second_out[0])
                     masked_np = postProcess(masked_tensor[0])
                     complete_np = postProcess(complete_img[0])
+                    complete_np = complete_np.astype(np.uint8)
 
-                    cv2.imshow('Predict_image', complete_img)
+                    cv2.imshow('Predict_image', complete_np)
                     print('Inpainting finished !!!')
 
             elif ch == ord("r"):

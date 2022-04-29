@@ -32,26 +32,32 @@ def process():
     try:
         filename = str(uuid.uuid4())
         file_path_raw = os.path.join(app.config["UPLOAD_FOLDER"], filename + '.png')
+        if not os.path.exists("static/uploads"):
+            os.makedirs("static/uploads")
         file_path_mask = os.path.join(app.config["UPLOAD_FOLDER"], 'mask_' + filename + '.png')
         file_path_output = os.path.join(app.config["UPLOAD_FOLDER"], 'output_' + filename + '.png')
 
         # Save mask
         mask_b64 = request.values[('mask_b64')]
-        print('Post success')
+        print('POST SUCCESS ')
         img_str = mask_b64.split(',')[1]
         output = open(file_path_mask, 'wb')
-        decoded = base64.b64decode(img_str)
+        decoded = base64.b64decode(img_str)  
         output.write(decoded)
         output.close()
-        resize(file_path_mask)
+        # resize(file_path_mask)
 
         # Save raw image
         file_raw = request.files.get('input_file')
         file_raw.save(file_path_raw)
-        resize(file_path_raw)
+        # resize(file_path_raw)
 
         # Doing inpainting
+        # img_raw = cv2.imread(file_path_raw)
+        # mask = cv2.imread(file_path_mask)
         output = predict(file_path_raw, file_path_mask)
+        print("DONE ^^")
+
         cv2.imwrite(file_path_output, output)
         resize(file_path_output, size=(128,128))
 
