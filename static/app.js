@@ -42,19 +42,19 @@ $('#btn_process').on('click', function (ev) {
         crossDomain: true,
         cache: false,
         beforeSend: function () {
-            $('#div-result-1').html('')
+            $('#div-result').html('')
             // $('#div-result-2').html('')
             // $('#div-result-3').html('')
             $('.row-result').hide()
         },
     }).done(function (jsondata, textStatus, jqXHR) {
-        img_1 = jsondata['output_image_1']
+        img_1 = jsondata['output_image']
         // img_2 = jsondata['output_image_2']
         // img_3 = jsondata['output_image_3']
 
         img_1 = window.location + '/' + img_1;
         // img_2 = window.location + '/' + img_2;
-        $('#div-result-1').append(`<img id='image_out_1' src="${img_1}" class="img_result" width=384 height=384>`)
+        $('#div-result').append(`<img id='image_out' src="${img_1}" class="img_result" width=128 height=128>`)
         // $('#div-result-2').append(`<img id='image_out_2' src="${img_2}" class="img_result" width=384 height=384>`)
 
         // for (i = 0; i < img_3.length; i++) {

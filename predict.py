@@ -64,11 +64,11 @@ def predict(img, mask, opt=None):
     # second_out = torch.clamp(second_out, -1., 1.)
     # second_out = (second_out + 1) / 2 * 255.0
     # generated = generated.cpu().numpy().astype(np.uint8)
-    print(second_out.shape)
-    print(mask.shape)
+    # print(second_out.shape)
+    # print(mask.shape)
     # generated = generated.transpose((1, 2, 0))
     result = img * (1 - mask) + second_out * mask
-    print(img.shape)
+    # print(img.shape)
     # result = result.permute(1, 2, 0).cpu().numpy()
     # result = cv2.cvtColor(result, cv2.COLOR_BGR2RGB) 
     # cv2.imwrite('result.png', result)
@@ -85,8 +85,9 @@ def predict(img, mask, opt=None):
     # Save to certain path
     save_img_name = '1' + '_' + 'second_out' + '.png'
     save_img_path = os.path.join(r"C:\Users\acer\deepfillv2_pytorch\outputs", save_img_name)
-    print(img_copy.shape)
+    # print(img_copy.shape)
     img_copy = cv2.cvtColor(img_copy, cv2.COLOR_BGR2RGB)
-    plt.imsave("predict.png", img_copy)
+    plt.imsave("static/uploads/output.png", img_copy)
     # cv2.imwrite(save_img_path, img_copy)
     print("DONE INPAINTING")
+    return img_copy

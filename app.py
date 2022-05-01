@@ -5,6 +5,7 @@ from flask import Flask, render_template, jsonify, request
 import numpy as np
 import uuid
 from PIL import Image
+import matplotlib.pyplot as plt
 from predict import predict
 
 
@@ -57,8 +58,10 @@ def process():
         # mask = cv2.imread(file_path_mask)
         output = predict(file_path_raw, file_path_mask)
         print("DONE ^^")
-
+        
+        output = cv2.cvtColor(output, cv2.COLOR_RGB2BGR)
         cv2.imwrite(file_path_output, output)
+        # plt.imsave(file_path_output, output)
         resize(file_path_output, size=(128,128))
 
         return jsonify(
