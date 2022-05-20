@@ -33,7 +33,7 @@ def demo(opt):
     for fn in img_list:
         filename = os.path.basename(fn).split('.')[0]
         orig_img = cv2.resize(cv2.imread(fn), (128,128), interpolation = cv2.INTER_AREA)
-        img = (ToTensor()(orig_img) * 2.0 - 1.0).unsqueeze(0)
+        img = (ToTensor()(orig_img) * 2 - 1).unsqueeze(0)
         
         h, w, c = orig_img.shape
         mask = np.zeros([h, w, 1], np.uint8)
@@ -51,8 +51,8 @@ def demo(opt):
                 print("Inpainting !!!")
                 with torch.no_grad():
                     mask_tensor = (ToTensor()(mask)).unsqueeze(0)
-                    # masked_tensor = (img * (1 - mask_tensor)) + mask_tensor
-                    _, second_out = model(img, mask_tensor)
+                    masked_tensor = (img * (1 - mask_tensor)) + mask_tensor
+                    _, second_out = model(masked_tensor, mask_tensor)
                     complete_img = second_out * mask_tensor + img * (1 - mask_tensor)
 
                     second_np = postProcess(second_out[0])

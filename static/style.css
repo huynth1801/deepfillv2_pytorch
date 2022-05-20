@@ -167,7 +167,6 @@ canvas {
     color: white;
 }
 
-
 .div-img {
     text-align: center;
     top: 50px;
@@ -182,4 +181,13 @@ canvas {
 .img_result {
     margin: 10px;
     border: solid 0.5px;
+}
+
+canvas {
+    position: absolute;
+    margin-left: -384px;
+}
+
+#input_file {
+    display: none;
 }
